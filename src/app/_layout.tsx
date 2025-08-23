@@ -1,8 +1,12 @@
+import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
 import { Drawer } from "expo-router/drawer";
-import { SQLiteDatabase, SQLiteProvider } from "expo-sqlite";
+import { openDatabaseSync, SQLiteDatabase, SQLiteProvider } from "expo-sqlite";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+const db = openDatabaseSync("test.db");
+
 export default function RootLayout() {
+  useDrizzleStudio(db);
   return (
     <SQLiteProvider databaseName="test.db" onInit={migrateDbIfNeeded}>
       <GestureHandlerRootView>
